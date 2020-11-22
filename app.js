@@ -1,19 +1,20 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
 require('dotenv/config');
 
 const app = express();
 
-// Middlewares
+app.use(bodyParser.json());
 
+// Import Routes
+const postRoute = require('./routes/posts');
+
+app.use('/posts', postRoute);
 
 // ROUTE
 app.get('/', (req,res) => {
     res.send('We are home');
-})
-
-app.get('/posts', (req,res) => {
-    res.send('We are on posts');
 })
 
 // Connect to db
